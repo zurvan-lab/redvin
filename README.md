@@ -1,2 +1,3 @@
 # redvin
-Inter universe nostr network (nostr as a p2p network)
+Official Interplanetary nostr network (IPNN) implementation.
+> Nostr as a P2P network
