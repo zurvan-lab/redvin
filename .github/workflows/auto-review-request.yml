@@ -1,0 +1,24 @@
+name: Send Review Request to Team
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  request_review:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send Review Request
+      uses: actions/github-script@v3
+      with:
+        script: |
+          const body = {
+            team_reviewers: ['redvin-team'],
+            // Add any other relevant parameters here, such as the PR title, description, or URL.
+          };
+          const response = await github.pulls.requestReviewers({ ...context.repo, pull_number: context.payload.pull_request.number, body: body });
+          console.log(response.data);
+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
