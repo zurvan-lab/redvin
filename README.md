@@ -1,4 +1,4 @@
-<img alt="iroh" src="./.img/logo.svg" width="150" />
+<img alt="redvin" src="./.img/logo.svg" width="150" />
 
 # Redvin
 
