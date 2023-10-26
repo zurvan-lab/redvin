@@ -2,6 +2,12 @@
 
 # Redvin
 
-Official Interplanetary nostr network (IPNN) implementation.
+[![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/EvYB9ZgYvV)
 
-> Nostr as a P2P network
+
+Official InterPlanetary Nostr Network (IPNN) implementation.
+[Nostr](https://nostr.com/) as a Decentralized P2P Network.
+
+## Documents
+
+> SOON 
