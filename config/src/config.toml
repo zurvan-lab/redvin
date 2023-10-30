@@ -1,0 +1,17 @@
+[network]
+port = 37771
+max_connections = 10
+
+[nostr]
+port = 4444
+max_ws_connection = 1000000
+
+[rpc]
+enable_rpc = true
+
+[metrics]
+enable_metrics = false
+
+[log]
+write_to_file = true
+path = "log.r7"
