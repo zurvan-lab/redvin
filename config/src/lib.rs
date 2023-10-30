@@ -81,9 +81,8 @@ mod tests {
         p.push("./config.toml");
         let mut file = match std::fs::File::create(p) {
             Ok(file) => file,
-            Err(e) => {
-                eprintln!("Failed to create temp config file: {}", e);
-                return;
+            Err(_) => {
+                panic!("Failed to create temp config file");
             }
         };
         if let Err(e) = file.write_all(
@@ -93,7 +92,7 @@ port = 37771
 max_connections = 10
 [nostr]
 port = 4444
-max_ws_connection = 1000000
+max_ws_connections = 1000000
 [rpc]
 enable_rpc = true
 [metrics]
