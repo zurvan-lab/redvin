@@ -5,11 +5,12 @@ Please read these guidelines before submitting a pull request or opening an issu
 
 ## Code guidelines
 
-<!-- TODO -->
+Codes should follow `cargo fmt` style and all of new code should have tests that pass.
+
 
 ## Commit guidelines
 
-Please follow these guidelines when committing changes to go-TimeTraceDB:
+Please follow these guidelines when committing changes to Redvin:
 
 - Each commit should represent a single, atomic change to the codebase.
   Avoid making multiple unrelated changes in a single commit.
