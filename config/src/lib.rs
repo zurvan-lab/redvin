@@ -94,10 +94,11 @@ enable_metrics = false
 [log]
 write_to_file = true
 path = 'log.r7'
-        "
-        ).expect("Failed to write to temp config file")
+        ",
+        )
+        .expect("Failed to write to temp config file")
     }
-    
+
     #[test]
     fn load_from_file_test() {
         temp_config_file();
