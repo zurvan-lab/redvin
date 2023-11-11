@@ -7,7 +7,8 @@ port = 4444
 max_ws_connections = 1000000
 
 [rpc]
-enable_rpc = true
+enable_grpc = true
+grpc_port = 9090
 
 [metrics]
 enable_metrics = false

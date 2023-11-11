@@ -4,39 +4,40 @@ use toml::from_str;
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    log: LogConfig,
-    rpc: RpcConfig,
-    metrics: MetricsConfig,
-    network: NetworkConfig,
-    nostr: NostrConfig,
+    pub log: LogConfig,
+    pub rpc: RpcConfig,
+    pub metrics: MetricsConfig,
+    pub network: NetworkConfig,
+    pub nostr: NostrConfig,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct LogConfig {
-    write_to_file: bool,
-    path: PathBuf,
+    pub write_to_file: bool,
+    pub path: PathBuf,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct RpcConfig {
-    enable_rpc: bool,
+    pub enable_grpc: bool,
+    pub grpc_port: u16,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct MetricsConfig {
-    enable_metrics: bool,
+    pub enable_metrics: bool,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct NetworkConfig {
-    port: u16,
-    max_connections: u16,
+    pub port: u16,
+    pub max_connections: u16,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct NostrConfig {
-    port: u16,
-    max_ws_connections: u32,
+    pub port: u16,
+    pub max_ws_connections: u32,
 }
 
 impl Default for Config {
@@ -46,7 +47,10 @@ impl Default for Config {
                 write_to_file: true,
                 path: PathBuf::from("log.r7"),
             },
-            rpc: RpcConfig { enable_rpc: true },
+            rpc: RpcConfig {
+                enable_grpc: true,
+                grpc_port: 9090,
+            },
             metrics: MetricsConfig {
                 enable_metrics: false,
             },
@@ -128,7 +132,8 @@ path = 'log.r7'
         );
         assert_eq!(loaded_from_file.nostr.port, default.nostr.port);
 
-        assert_eq!(loaded_from_file.rpc.enable_rpc, default.rpc.enable_rpc);
+        assert_eq!(loaded_from_file.rpc.enable_grpc, default.rpc.enable_grpc);
+        assert_eq!(loaded_from_file.rpc.grpc_port, default.rpc.grpc_port);
     }
 
     #[test]
@@ -146,6 +151,7 @@ path = 'log.r7'
         assert_eq!(1000000, default.nostr.max_ws_connections);
         assert_eq!(4444, default.nostr.port);
 
-        assert_eq!(true, default.rpc.enable_rpc);
+        assert_eq!(true, default.rpc.enable_grpc);
+        assert_eq!(9090, default.rpc.grpc_port);
     }
 }
