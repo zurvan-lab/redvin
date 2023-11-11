@@ -1,5 +1,5 @@
 use serde::Deserialize;
-use std::error::Error;
+use std::{io, path::PathBuf};
 use toml::from_str;
 
 #[derive(Debug, Deserialize)]
@@ -14,7 +14,7 @@ pub struct Config {
 #[derive(Debug, Deserialize)]
 pub struct LogConfig {
     pub write_to_file: bool,
-    pub path: String,
+    pub path: PathBuf,
 }
 
 #[derive(Debug, Deserialize)]
@@ -40,18 +40,12 @@ pub struct NostrConfig {
     pub max_ws_connections: u32,
 }
 
-impl Config {
-    pub fn load_from_file(path: &str) -> Result<Self, Box<dyn Error>> {
-        let contents = std::fs::read_to_string(path)?;
-        let config: Config = from_str(&contents)?;
-        Ok(config)
-    }
-
-    pub fn default() -> Result<Self, Box<dyn Error>> {
-        let config: Config = Config {
+impl Default for Config {
+    fn default() -> Self {
+        Self {
             log: LogConfig {
                 write_to_file: true,
-                path: "log.r7".to_owned(),
+                path: PathBuf::from("log.r7"),
             },
             rpc: RpcConfig {
                 enable_grpc: true,
@@ -68,9 +62,14 @@ impl Config {
                 port: 4444,
                 max_ws_connections: 1000000,
             },
-        };
+        }
+    }
+}
 
-        Ok(config)
+impl Config {
+    pub fn load_from_file(path: &str) -> Result<Self, io::Error> {
+        let contents = std::fs::read_to_string(path)?;
+        Ok(from_str(&contents)?)
     }
 }
 
@@ -83,13 +82,8 @@ mod tests {
     fn temp_config_file() {
         let mut p = std::env::temp_dir();
         p.push("./config.toml");
-        let mut file = match std::fs::File::create(p) {
-            Ok(file) => file,
-            Err(_) => {
-                panic!("Failed to create temp config file");
-            }
-        };
-        if let Err(e) = file.write_all(
+        let mut file = std::fs::File::create(p).expect("Failed to create temp config file");
+        file.write_all(
             b"
 [network]
 port = 37771
@@ -105,16 +99,15 @@ enable_metrics = false
 write_to_file = true
 path = 'log.r7'
         ",
-        ) {
-            eprintln!("Failed to write to temp config file: {}", e);
-        }
+        )
+        .expect("Failed to write to temp config file")
     }
 
     #[test]
     fn load_from_file_test() {
         temp_config_file();
         let loaded_from_file = Config::load_from_file("./config.toml").unwrap();
-        let default = Config::default().unwrap();
+        let default = Config::default();
 
         assert_eq!(loaded_from_file.log.path, default.log.path);
         assert_eq!(
@@ -145,9 +138,9 @@ path = 'log.r7'
 
     #[test]
     fn default_test() {
-        let default = Config::default().unwrap();
+        let default = Config::default();
 
-        assert_eq!("log.r7", default.log.path);
+        assert_eq!(PathBuf::from("log.r7"), default.log.path);
         assert_eq!(true, default.log.write_to_file);
 
         assert_eq!(false, default.metrics.enable_metrics);
