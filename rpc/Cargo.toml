@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 config = { version =  "*", path = "../config" }
+tonic = "0.10.2"
