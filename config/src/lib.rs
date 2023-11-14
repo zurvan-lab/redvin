@@ -1,5 +1,5 @@
 use serde::Deserialize;
-use std::{io, path::PathBuf};
+use std::{io, path::PathBuf, string};
 use toml::from_str;
 
 #[derive(Debug, Deserialize)]
@@ -32,6 +32,7 @@ pub struct MetricsConfig {
 pub struct NetworkConfig {
     pub port: u16,
     pub max_connections: u16,
+    pub moniker: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -57,6 +58,7 @@ impl Default for Config {
             network: NetworkConfig {
                 port: 37771,
                 max_connections: 10,
+                moniker: "".to_string(),
             },
             nostr: NostrConfig {
                 port: 4444,
@@ -88,11 +90,13 @@ mod tests {
 [network]
 port = 37771
 max_connections = 10
+moniker = ''
 [nostr]
 port = 4444
 max_ws_connections = 1000000
 [rpc]
-enable_rpc = true
+enable_grpc = true
+grpc_port = 9090
 [metrics]
 enable_metrics = false
 [log]
@@ -125,6 +129,7 @@ path = 'log.r7'
             default.network.max_connections
         );
         assert_eq!(loaded_from_file.network.port, default.network.port);
+        assert_eq!(loaded_from_file.network.moniker, default.network.moniker);
 
         assert_eq!(
             loaded_from_file.nostr.max_ws_connections,
@@ -147,6 +152,7 @@ path = 'log.r7'
 
         assert_eq!(10, default.network.max_connections);
         assert_eq!(37771, default.network.port);
+        assert_eq!("", default.network.moniker);
 
         assert_eq!(1000000, default.nostr.max_ws_connections);
         assert_eq!(4444, default.nostr.port);
