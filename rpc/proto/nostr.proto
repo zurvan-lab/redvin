@@ -3,7 +3,7 @@ package nostr;
 
 service NostrRPC {
     rpc GetAllPublicKeys(GetAllPublicKeysRequest) returns (GetAllPublicKeysResponse);
-  }
+}
 
 message GetAllPublicKeysRequest {}
 
