@@ -1,6 +1,7 @@
 [network]
 port = 37771
 max_connections = 10
+moniker = ""
 
 [nostr]
 port = 4444

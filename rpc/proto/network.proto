@@ -1,0 +1,35 @@
+syntax = "proto3";
+package network;
+
+service Network {
+    rpc GetNetworkInfo(GetNetworkInfoRequest) returns (GetNetworkInfoResponse);
+    rpc GetNodeInfo(GetNodeInfoRequest) returns (GetNodeInfoResponse);
+  }
+
+message GetNetworkInfoRequest {}
+
+message GetNetworkInfoResponse {
+    int32 total_sent_bytes = 1;
+    int32 total_received_bytes = 2;
+    int64 started_at = 3;
+    repeated PeerInfo peers = 4;
+}
+
+message GetNodeInfoRequest {}
+
+message GetNodeInfoResponse {
+  string moniker = 1;
+  string agent = 2;
+  bytes peer_id = 3;
+}
+
+message PeerInfo {
+    int32 status = 1;
+    string moniker = 2;
+    string agent = 3;
+    bytes peer_id = 4;
+    int64 last_sent = 11;
+    int64 last_received = 12;
+    string address = 15;
+  }
+  

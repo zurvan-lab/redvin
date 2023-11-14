@@ -1,0 +1,12 @@
+syntax = "proto3";
+package nostr;
+
+service NostrRPC {
+    rpc GetAllPublicKeys(GetAllPublicKeysRequest) returns (GetAllPublicKeysResponse);
+  }
+
+message GetAllPublicKeysRequest {}
+
+message GetAllPublicKeysResponse {
+    repeated string public_keys = 1;
+}
