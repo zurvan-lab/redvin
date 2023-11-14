@@ -32,4 +32,3 @@ message PeerInfo {
     int64 last_received = 12;
     string address = 15;
 }
-  
