@@ -19,7 +19,7 @@ impl Network for NetworkService {
         &self,
         request: Request<GetNetworkInfoRequest>,
     ) -> Result<Response<GetNetworkInfoResponse>, Status> {
-        let req = request.into_inner();
+        let _req = request.into_inner();
 
         let reply = GetNetworkInfoResponse {
             total_sent_bytes: 0,
@@ -43,7 +43,7 @@ impl Network for NetworkService {
         &self,
         request: Request<GetNodeInfoRequest>,
     ) -> Result<Response<GetNodeInfoResponse>, Status> {
-        let req = request.into_inner();
+        let _req = request.into_inner();
 
         let reply = GetNodeInfoResponse {
             moniker: "".to_string(),

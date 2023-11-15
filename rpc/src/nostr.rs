@@ -16,7 +16,7 @@ impl NostrRpc for NostrRpcService {
         &self,
         request: Request<GetAllPublicKeysRequest>,
     ) -> Result<Response<GetAllPublicKeysResponse>, Status> {
-        let req = request.into_inner();
+        let _req = request.into_inner();
 
         let reply = GetAllPublicKeysResponse {
             public_keys: vec!["".to_string()],

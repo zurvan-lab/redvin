@@ -18,7 +18,7 @@ pub async fn start(port: u16) -> Result<(), io::Error> {
         .add_service(NetworkServer::new(network_service))
         .add_service(NostrRpcServer::new(nostr_rpc_service))
         .serve(addr)
-        .await;
+        .await.unwrap();
 
     Ok(())
 }
