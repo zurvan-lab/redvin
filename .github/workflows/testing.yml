@@ -15,6 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - run: apt-get install protobuf-compiler
+      - run: sudo apt-get install protobuf-compiler
       - run: cargo test --all
       
