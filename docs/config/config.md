@@ -7,6 +7,7 @@ Here we are going through each part of this `config.toml` and explain them.
 ## network
 
 First part of config file is `network`, you can determine the listening port and maximum connection of your Redvin node in this part.
+moniker is a name for your node in network, set a moniker or keep is empty is up to node owner.
 
 Example:
 
@@ -14,6 +15,7 @@ Example:
 [network]
 port = 37771
 max_connections = 10
+moniker = ""
 ```
 
 ## nostr
@@ -36,7 +38,8 @@ Example:
 
 ```toml
 [rpc]
-enable_rpc = true
+enable_grpc = true
+grpc_port = 9090
 ```
 
 ## metrics
