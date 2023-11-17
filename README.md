@@ -8,14 +8,22 @@
 Official InterPlanetary Nostr Network (IPNN) implementation.
 [Nostr](https://nostr.com/) as a Decentralized P2P Network.
 
+## Supported NIP and IIPs
+
+Check supported
+
+- [NIPs (Nostr Improvement Proposals)](https://github.com/nostr-protocol/nips) : [HERE](./docs/NIPs)
+
+- [IIPs (IPNN Improvement Proposals)](https://github.com/zurvan-lab/IPNN)  : [HERE](./docs/IIPs)
+
+## Documents
+
+You can find all documents on [docs](./docs/) folder.
 
 ## Contributing
 
 Contributions to the Redvin are appreciated. Please read the [CONTRIBUTING](./CONTRIBUTING.md) guidelines before submitting a pull request or opening an issue.
 
-## Documents
-
-You can find all documents on [docs](./docs/) folder.
 
 ## License
 
