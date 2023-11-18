@@ -4,6 +4,7 @@ package network;
 service Network {
     rpc GetNetworkInfo(GetNetworkInfoRequest) returns (GetNetworkInfoResponse);
     rpc GetNodeInfo(GetNodeInfoRequest) returns (GetNodeInfoResponse);
+    rpc NetworkHealth(NetworkHealthRequest) returns (NetworkHealthResponse);
 }
 
 message GetNetworkInfoRequest {}
@@ -21,6 +22,12 @@ message GetNodeInfoResponse {
   string moniker = 1;
   string agent = 2;
   bytes peer_id = 3;
+}
+
+message NetworkHealthRequest {}
+
+message NetworkHealthResponse {
+    bool is_healthy = 1;
 }
 
 message PeerInfo {
