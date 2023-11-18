@@ -3,7 +3,7 @@ use tonic::{Request, Response, Status};
 use network::network_server::Network;
 use network::{
     GetNetworkInfoRequest, GetNetworkInfoResponse, GetNodeInfoRequest, GetNodeInfoResponse,
-    PeerInfo,
+    NetworkHealthRequest, NetworkHealthResponse, PeerInfo,
 };
 
 pub mod network {
@@ -50,6 +50,17 @@ impl Network for NetworkService {
             agent: "".to_string(),
             peer_id: vec![0],
         };
+
+        Ok(Response::new(reply))
+    }
+
+    async fn network_health(
+        &self,
+        request: Request<NetworkHealthRequest>,
+    ) -> Result<Response<NetworkHealthResponse>, Status> {
+        let _req = request.into_inner();
+
+        let reply = NetworkHealthResponse { is_healthy: false };
 
         Ok(Response::new(reply))
     }

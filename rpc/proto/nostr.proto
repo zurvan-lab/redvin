@@ -3,10 +3,36 @@ package nostr;
 
 service NostrRPC {
     rpc GetAllPublicKeys(GetAllPublicKeysRequest) returns (GetAllPublicKeysResponse);
+    rpc GetProfile(GetProfileRequest) returns (GetProfileResponse);
+    rpc GetEvent(GetEventRequest) returns (GetEventResponse);
 }
 
 message GetAllPublicKeysRequest {}
 
 message GetAllPublicKeysResponse {
     repeated string public_keys = 1;
+}
+
+message GetProfileRequest {
+    string npub = 1; // TODO: Adding get by NIP-05 address?
+}
+
+message GetProfileResponse {
+    string name = 1;
+    string about = 2;
+    string avatar = 3;
+    string banner = 4;
+    repeated string nip5_address = 5; 
+}
+
+message GetEventRequest {
+    string nevent = 1;
+}
+
+message GetEventResponse {
+    string author_npub = 1;
+    string content = 2;
+    string published_at = 3;
+    int32 kind = 4;
+    string sig = 5;
 }
