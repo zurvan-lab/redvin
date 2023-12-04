@@ -12,9 +12,9 @@ Official InterPlanetary Nostr Network (IPNN) implementation.
 
 Check supported
 
-- [NIPs (Nostr Improvement Proposals)](https://github.com/nostr-protocol/nips) : [HERE](./docs/NIPs)
+- [NIPs (Nostr Improvement Proposals)](https://github.com/nostr-protocol/nips) : [HERE](./docs/NIPs.md)
 
-- [IIPs (IPNN Improvement Proposals)](https://github.com/zurvan-lab/IPNN)  : [HERE](./docs/IIPs)
+- [IIPs (IPNN Improvement Proposals)](https://github.com/zurvan-lab/IPNN)  : [HERE](./docs/IIPs.md)
 
 ## Documents
 
