@@ -26,13 +26,13 @@ impl Network for NetworkService {
             total_received_bytes: 0,
             started_at: 0,
             peers: vec![PeerInfo {
-                address: "".to_string(),
-                agent: "".to_string(),
-                moniker: "".to_string(),
+                address: String::from(""),
+                agent: String::from(""),
+                moniker: String::from(""),
                 last_received: 0,
                 last_sent: 0,
                 status: 0,
-                peer_id: vec![0],
+                peer_id: Vec::new(),
             }],
         };
 
@@ -46,9 +46,9 @@ impl Network for NetworkService {
         let _req = request.into_inner();
 
         let reply = GetNodeInfoResponse {
-            moniker: "".to_string(),
-            agent: "".to_string(),
-            peer_id: vec![0],
+            moniker: String::from(""),
+            agent: String::from(""),
+            peer_id: Vec::new(),
         };
 
         Ok(Response::new(reply))

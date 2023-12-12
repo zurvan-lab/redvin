@@ -58,7 +58,7 @@ impl Default for Config {
             network: NetworkConfig {
                 port: 37771,
                 max_connections: 10,
-                moniker: "".to_string(),
+                moniker: String::from(""),
             },
             nostr: NostrConfig {
                 port: 4444,
@@ -152,7 +152,7 @@ path = 'log.r7'
 
         assert_eq!(10, default.network.max_connections);
         assert_eq!(37771, default.network.port);
-        assert_eq!("", default.network.moniker);
+        assert_eq!(String::from(""), default.network.moniker);
 
         assert_eq!(1000000, default.nostr.max_ws_connections);
         assert_eq!(4444, default.nostr.port);

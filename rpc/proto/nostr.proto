@@ -14,7 +14,7 @@ message GetAllPublicKeysResponse {
 }
 
 message GetProfileRequest {
-    string npub = 1; // TODO: Adding get by NIP-05 address?
+    string npub = 1; 
 }
 
 message GetProfileResponse {
@@ -22,7 +22,8 @@ message GetProfileResponse {
     string about = 2;
     string avatar = 3;
     string banner = 4;
-    repeated string nip5_address = 5; 
+    string nip5_address = 5;
+    string ln_address = 6;
 }
 
 message GetEventRequest {

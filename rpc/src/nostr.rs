@@ -22,7 +22,7 @@ impl NostrRpc for NostrRpcService {
         let _req = request.into_inner();
 
         let reply = GetAllPublicKeysResponse {
-            public_keys: vec!["".to_string()],
+            public_keys: Vec::new(),
         };
 
         Ok(Response::new(reply))
@@ -35,11 +35,12 @@ impl NostrRpc for NostrRpcService {
         let _req = request.into_inner();
 
         let reply = GetProfileResponse {
-            about: "".to_string(),
-            avatar: "".to_string(),
-            banner: "".to_string(),
-            name: "".to_string(),
-            nip5_address: vec!["".to_string()],
+            about: String::from(""),
+            avatar: String::from(""),
+            banner: String::from(""),
+            name: String::from(""),
+            nip5_address: String::from(""),
+            ln_address: String::from(""),
         };
 
         Ok(Response::new(reply))
@@ -52,11 +53,11 @@ impl NostrRpc for NostrRpcService {
         let _req = request.into_inner();
 
         let reply = GetEventResponse {
-            author_npub: "".to_string(),
-            content: "".to_string(),
-            published_at: "".to_string(),
+            author_npub: String::from(""),
+            content: String::from(""),
+            published_at: String::from(""),
             kind: 0,
-            sig: "".to_string(),
+            sig: String::from(""),
         };
 
         Ok(Response::new(reply))
