@@ -7,13 +7,14 @@ Here we are going through each part of this `config.toml` and explain them.
 ## network
 
 First part of config file is `network`, you can determine the listening port and maximum connection of your Redvin node in this part.
-moniker is a name for your node in network, set a moniker or keep is empty is up to node owner.
+moniker is a name for your node in network, set a moniker or keep is empty is up to node owner. bootstarps is an array of bootstarp nodes IP address used when node starting.
 
 Example:
 
 ```toml
 [network]
 port = 37771
+bootstraps = []
 max_connections = 10
 moniker = ""
 ```
@@ -26,8 +27,8 @@ Example:
 
 ```toml
 [nostr]
-port = 4444
-max_ws_connections = 1000000
+port = 443 # we suggest to keep this.
+max_ws_connections = 100
 ```
 
 ## rpc
