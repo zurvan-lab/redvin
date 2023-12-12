@@ -1,11 +1,12 @@
 [network]
 port = 37771
+bootstraps = []
 max_connections = 10
 moniker = ""
 
 [nostr]
-port = 4444
-max_ws_connections = 1000000
+port = 443
+max_ws_connections = 100
 
 [rpc]
 enable_grpc = true

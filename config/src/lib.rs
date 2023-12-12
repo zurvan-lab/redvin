@@ -31,6 +31,7 @@ pub struct MetricsConfig {
 #[derive(Debug, Deserialize)]
 pub struct NetworkConfig {
     pub port: u16,
+    pub bootstraps: Vec<String>,
     pub max_connections: u16,
     pub moniker: String,
 }
@@ -57,12 +58,13 @@ impl Default for Config {
             },
             network: NetworkConfig {
                 port: 37771,
+                bootstraps: Vec::new(),
                 max_connections: 10,
                 moniker: String::from(""),
             },
             nostr: NostrConfig {
-                port: 4444,
-                max_ws_connections: 1000000,
+                port: 443,
+                max_ws_connections: 100,
             },
         }
     }
@@ -92,8 +94,9 @@ port = 37771
 max_connections = 10
 moniker = ''
 [nostr]
-port = 4444
-max_ws_connections = 1000000
+port = 443
+bootstraps = []
+max_ws_connections = 100
 [rpc]
 enable_grpc = true
 grpc_port = 9090
@@ -129,6 +132,10 @@ path = 'log.r7'
             default.network.max_connections
         );
         assert_eq!(loaded_from_file.network.port, default.network.port);
+        assert_eq!(
+            loaded_from_file.network.bootstraps,
+            default.network.bootstraps
+        );
         assert_eq!(loaded_from_file.network.moniker, default.network.moniker);
 
         assert_eq!(
@@ -144,6 +151,7 @@ path = 'log.r7'
     #[test]
     fn default_test() {
         let default = Config::default();
+        let bootstraps: Vec<String> = Vec::new();
 
         assert_eq!(PathBuf::from("log.r7"), default.log.path);
         assert_eq!(true, default.log.write_to_file);
@@ -152,10 +160,11 @@ path = 'log.r7'
 
         assert_eq!(10, default.network.max_connections);
         assert_eq!(37771, default.network.port);
+        assert_eq!(bootstraps, default.network.bootstraps);
         assert_eq!(String::from(""), default.network.moniker);
 
-        assert_eq!(1000000, default.nostr.max_ws_connections);
-        assert_eq!(4444, default.nostr.port);
+        assert_eq!(100, default.nostr.max_ws_connections);
+        assert_eq!(443, default.nostr.port);
 
         assert_eq!(true, default.rpc.enable_grpc);
         assert_eq!(9090, default.rpc.grpc_port);
