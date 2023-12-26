@@ -1,5 +1,8 @@
 use serde::Deserialize;
-use std::{io, path::PathBuf};
+use std::{
+    io::{self},
+    path::PathBuf,
+};
 use toml::from_str;
 
 #[derive(Debug, Deserialize)]
@@ -75,6 +78,30 @@ impl Config {
         let contents = std::fs::read_to_string(path)?;
         Ok(from_str(&contents)?)
     }
+
+    pub fn default_file() -> &'static [u8] {
+        b"[network]
+port = 37771
+max_connections = 10
+moniker = ''
+
+[nostr]
+port = 443
+bootstraps = []
+max_ws_connections = 100
+
+[rpc]
+enable_grpc = true
+grpc_port = 9090
+
+[metrics]
+enable_metrics = false
+
+[log]
+write_to_file = true
+path = 'log.r7'
+"
+    }
 }
 
 #[cfg(test)]
@@ -87,27 +114,8 @@ mod tests {
         let mut p = std::env::temp_dir();
         p.push("./config.toml");
         let mut file = std::fs::File::create(p).expect("Failed to create temp config file");
-        file.write_all(
-            b"
-[network]
-port = 37771
-max_connections = 10
-moniker = ''
-[nostr]
-port = 443
-bootstraps = []
-max_ws_connections = 100
-[rpc]
-enable_grpc = true
-grpc_port = 9090
-[metrics]
-enable_metrics = false
-[log]
-write_to_file = true
-path = 'log.r7'
-        ",
-        )
-        .expect("Failed to write to temp config file")
+        file.write_all(Config::default_file())
+            .expect("Failed to write to temp config file")
     }
 
     #[test]
