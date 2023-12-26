@@ -1,3 +1,4 @@
+use config::RpcConfig;
 use std::io;
 use tonic::transport::Server;
 
@@ -8,8 +9,8 @@ use crate::nostr;
 use crate::nostr::nostr::nostr_rpc_server::NostrRpcServer;
 
 #[tokio::main]
-pub async fn start(port: u16) -> Result<(), io::Error> {
-    let addr = format!("[::1]:{}", port).parse().unwrap();
+pub async fn start(cfg: RpcConfig) -> Result<(), io::Error> {
+    let addr = format!("[::1]:{}", cfg.grpc_port).parse().unwrap();
 
     let network_service = network::NetworkService::default();
     let nostr_rpc_service = nostr::NostrRpcService::default();
