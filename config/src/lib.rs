@@ -35,7 +35,9 @@ pub struct MetricsConfig {
 pub struct NetworkConfig {
     pub port: u16,
     pub bootstraps: Vec<String>,
+    pub listen_address: Vec<String>,
     pub max_connections: u16,
+    pub name: String,
     pub moniker: String,
 }
 
@@ -62,8 +64,15 @@ impl Default for Config {
             network: NetworkConfig {
                 port: 37771,
                 bootstraps: Vec::new(),
+                listen_address: vec![
+                    "/ip4/0.0.0.0/tcp/21777".into(),
+                    "/ip4/0.0.0.0/udp/21777/quic-v1".into(),
+                    "/ip6/::/tcp/21777".into(),
+                    "/ip6/::/udp/21777/quic-v1".into(),
+                ],
                 max_connections: 10,
                 moniker: String::from(""),
+                name: String::from("redvin"),
             },
             nostr: NostrConfig {
                 port: 443,
@@ -84,6 +93,13 @@ impl Config {
 port = 37771
 max_connections = 10
 moniker = ''
+name = 'redvin'
+listen_address = [
+    '/ip4/0.0.0.0/tcp/21777',
+    '/ip4/0.0.0.0/udp/21777/quic-v1',
+	'/ip6/::/tcp/21777',
+    '/ip6/::/udp/21777/quic-v1'
+]
 
 [nostr]
 port = 443
@@ -145,6 +161,11 @@ mod tests {
             default.network.bootstraps
         );
         assert_eq!(loaded_from_file.network.moniker, default.network.moniker);
+        assert_eq!(loaded_from_file.network.name, default.network.name);
+        assert_eq!(
+            loaded_from_file.network.listen_address,
+            default.network.listen_address
+        );
 
         assert_eq!(
             loaded_from_file.nostr.max_ws_connections,
@@ -170,6 +191,16 @@ mod tests {
         assert_eq!(37771, default.network.port);
         assert_eq!(bootstraps, default.network.bootstraps);
         assert_eq!(String::from(""), default.network.moniker);
+        assert_eq!(
+            vec![
+                "/ip4/0.0.0.0/tcp/21777",
+                "/ip4/0.0.0.0/udp/21777/quic-v1".into(),
+                "/ip6/::/tcp/21777".into(),
+                "/ip6/::/udp/21777/quic-v1".into(),
+            ],
+            default.network.listen_address
+        );
+        assert_eq!(String::from("redvin"), default.network.name);
 
         assert_eq!(100, default.nostr.max_ws_connections);
         assert_eq!(443, default.nostr.port);

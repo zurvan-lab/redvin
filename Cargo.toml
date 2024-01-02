@@ -13,9 +13,15 @@ config = { version =  "*", path = "./config" }
 
 members = [
     "metrics",
-    "network",
+    "p2p",
     "nostr_relay",
     "node",
     "rpc",
     "config"
 ]
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
