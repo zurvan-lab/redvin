@@ -7,4 +7,6 @@ edition = "2021"
 
 [dependencies]
 config = { version =  "*", path = "../config" }
-libp2p = {version = "0.53.2", features = [ "async-std", "dns", "kad", "mdns", "noise", "macros", "tcp", "yamux"]}
+libp2p = {version = "0.53.2", features = [ "async-std", "dns", "kad", "mdns", "noise", "macros", "tcp", "yamux", "ping", "tls"]}
+futures = "0.3.21"
+tokio = { version = "1.18", features = ["macros", "rt-multi-thread"] }

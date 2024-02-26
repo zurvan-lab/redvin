@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.4.11", features = ["cargo"] }
 config = { version =  "*", path = "./config" }
+futures = "0.3.30"
 
 [workspace]
 
