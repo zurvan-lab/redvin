@@ -1,8 +1,16 @@
 [network]
 port = 37771
 bootstraps = []
+listen_address = [
+    "/ip4/0.0.0.0/tcp/21777",
+    "/ip4/0.0.0.0/udp/21777/quic-v1",
+	"/ip6/::/tcp/21777",
+    "/ip6/::/udp/21777/quic-v1"
+]
+
 max_connections = 10
 moniker = ""
+name = "redvin"
 
 [nostr]
 port = 443
